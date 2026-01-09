@@ -15,7 +15,7 @@ This project predicts anemia using a combination of:
 git clone <your-repo-link>
 
 3. Install dependencies
-pip install -r requirements.txt
+pip install -r app/requirements.txt
 
 4. Run the FastAPI server
 uvicorn main:app --reload
