@@ -36,17 +36,22 @@ project-folder/
 
 Run the following commands in order:
 
-python synthetic_data_generator.py
-python train_baseline_model.py
-pip install -r app/requirements.txt
-pip install jinja2
-uvicorn app.main:app --reload
+- python synthetic_data_generator.py
+- python train_baseline_model.py
+- pip install -r app/requirements.txt
+- pip install jinja2
+- uvicorn app.main:app --reload
 
 
 ## Example Test Input
 {
-  "hemoglobin": 10.0,
-  "ferritin": 8.0,
-  "mcv": 72.0,
-  "symptoms": ["fatigue", "pallor"]
+
+   "hemoglobin": 10.0,
+   
+   "ferritin": 8.0,
+   
+   "mcv": 72.0,
+   
+   "symptoms": ["fatigue", "pallor"]
+   
 }
