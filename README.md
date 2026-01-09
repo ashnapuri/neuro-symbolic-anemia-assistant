@@ -4,27 +4,44 @@ This project predicts anemia using a combination of:
 - Machine Learning (Logistic Regression)
 - Rule-based clinical reasoning
 
+The system provides both a prediction and clear explanations.
+
+---
+
 ## Features
 - Predicts anemia using hemoglobin, ferritin, MCV, and symptoms
-- Provides rule-based explanations
-- Uses FastAPI with Swagger UI
+- Uses a trained ML model
+- Provides explainable rule-based reasoning
+- Built using FastAPI with Swagger UI
+
+---
+
+## Project Structure
+
+project-folder/
+│
+├── app/
+│   ├── main.py
+│   ├── rules_engine.py
+│   ├── sample_rules.json
+│   ├── requirements.txt
+|   ├── synthetic_data_generator.py
+|   ├── train_baseline_model.py
+|   ├── baseline_anemia_model.joblib
+└── README.txt
+
+---
 
 ## How to Run the Project
 
-1. Clone the repository
-git clone <your-repo-link>
+Run the following commands in order:
 
-3. Install dependencies
+python synthetic_data_generator.py
+python train_baseline_model.py
 pip install -r app/requirements.txt
+pip install jinja2
+uvicorn app.main:app --reload
 
-4. Run the FastAPI server
-uvicorn main:app --reload
-
-5. Open SwaggerUI
-http://127.0.0.1:8000/docs
-
-6. Open UI Interface
- http://127.0.0.1:8000/
 
 ## Example Test Input
 {
