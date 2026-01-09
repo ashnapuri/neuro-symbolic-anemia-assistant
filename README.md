@@ -28,7 +28,7 @@ project-folder/
 |   ├── synthetic_data_generator.py
 |   ├── train_baseline_model.py
 |   ├── baseline_anemia_model.joblib
-└── README.txt
+└── README.md
 
 ---
 
