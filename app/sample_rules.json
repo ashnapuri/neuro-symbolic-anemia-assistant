@@ -1,0 +1,41 @@
+{
+  "anemia_rules": [
+    {
+      "name": "Low Hemoglobin",
+      "condition": {
+        "hemoglobin": { "lt": 12 }
+      },
+      "conclusion": {
+        "summary": "Low hemoglobin detected",
+        "clinical_basis": "Hemoglobin below 12 g/dL meets laboratory criteria for anemia in adults",
+        "recommended_next_step": "Confirm anemia type and evaluate underlying cause"
+      },
+      "weight": 0.5
+    },
+    {
+      "name": "Low Ferritin",
+      "condition": {
+        "ferritin": { "lt": 15 }
+      },
+      "conclusion": {
+        "summary": "Iron deficiency pattern detected",
+        "clinical_basis": "Ferritin below 15 ng/mL suggests depleted iron stores",
+        "recommended_next_step": "Order iron studies and assess dietary intake or blood loss"
+      },
+      "weight": 0.3
+    },
+    {
+      "name": "Microcytosis",
+      "condition": {
+        "mcv": { "lt": 80 }
+      },
+      "conclusion": {
+        "summary": "Microcytic red cell pattern",
+        "clinical_basis": "Low MCV is commonly associated with iron deficiency or thalassemia",
+        "recommended_next_step": "Correlate with iron studies and clinical history"
+      },
+      "weight": 0.2
+    }
+  ]
+}
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anemia Clinical Decision Support</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f7f9fb;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, textarea, button {
+            width: 300px;
+            padding: 6px;
+            margin-top: 4px;
+        }
+        button {
+            margin-top: 20px;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+        }
+        .confidence {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Anemia Decision Support Tool</h1>
+
+<p><strong>Intended use:</strong> Clinical decision support for educational purposes only.</p>
+
+<label>Hemoglobin (g/dL)</label>
+<input id="hb" type="number" step="0.1" value="10.5">
+
+<label>Ferritin (ng/mL)</label>
+<input id="ferritin" type="number" step="0.1" value="12">
+
+<label>MCV (fL)</label>
+<input id="mcv" type="number" step="0.1" value="72">
+
+<label>Symptoms (comma separated)</label>
+<textarea id="symptoms">fatigue,dizziness</textarea>
+
+<button onclick="submitData()">Assess</button>
+
+<div class="result" id="result"></div>
+
+<script>
+async function submitData() {
+    const payload = {
+        hemoglobin: parseFloat(document.getElementById("hb").value),
+        ferritin: parseFloat(document.getElementById("ferritin").value),
+        mcv: parseFloat(document.getElementById("mcv").value),
+        symptoms: document.getElementById("symptoms").value.split(",").map(s => s.trim())
+    };
+
+    const response = await fetch("/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+
+    let html = `
+        <p><strong>ML Prediction:</strong> ${data.ml_prediction}</p>
+        <p><strong>Overall Confidence:</strong>
+           <span class="confidence">${data.overall_confidence}</span></p>
+        <h3>Clinical Explanations</h3>
+        <ul>
+    `;
+
+    data.explanations.forEach(e => {
+        html += `<li><strong>${e.summary}</strong><br>
+                 ${e.clinical_basis}<br>
+                 <em>Next step:</em> ${e.recommended_next_step}</li>`;
+    });
+
+    html += "</ul>";
+
+    document.getElementById("result").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
